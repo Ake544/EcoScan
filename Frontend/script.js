@@ -104,6 +104,7 @@ function handleFileSelect() {
 
 // Analyze image with AI
 async function analyzeImage() {
+    const API_URL = import.meta.env.VITE_API_URL;
     if (!fileInput.files.length) return;
     
     const file = fileInput.files[0];
@@ -116,7 +117,7 @@ async function analyzeImage() {
     errorElement.classList.add('hidden');
     
     try {
-    const response = await fetch('http://localhost:8000/predict', {
+    const response = await fetch(`${API_URL}/predict`, {
         method: 'POST',
         body: formData
     });

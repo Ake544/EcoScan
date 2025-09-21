@@ -15,9 +15,13 @@ from model.model_loader import ecoscan_model
 app = FastAPI(title="EcoScan API", description="API for waste material classification")
 
 # Add CORS middleware to allow frontend requests
+origins = [
+    "https://ecoscan-backend.onrender.com"
+    ]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
