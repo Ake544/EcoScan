@@ -1,0 +1,8 @@
+# render.yaml in your Backend folder
+services:
+  - type: web
+    name: ecoscan-backend
+    env: python
+    pythonVersion: "3.12.9"
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
