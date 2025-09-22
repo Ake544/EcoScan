@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.icon-placeholder {
+  width: 48px;
+  height: 48px;
+  background-color: #e7f3f3;
+  border-radius: 9999px;
+}
+
+.hero-bg {
+  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBPuKzeuOeVdN935XI1XDV4UEEtV9k3ToCkMJseApil1nXhUnY3GkCRyoTUEfHvZOdD1Rmc352q-fSiHh50_qW8dogA9qukrzHljPq_ur3HFa6rDrG5Nxr6I8cZ3bwkhOrWSp37zRSaPDGVBlE5t4ETHrg7TqpJH223OMYf55_8Y3bJAcqIKYn88kH2UtlY-P0KLTgCWv_sb36-gVHrmR3N5DInBhzZ6SSNql5QpMY7aX8tYjT2MpaKYcAH1TpebkM2teQMTu-LxwMr");
+}
