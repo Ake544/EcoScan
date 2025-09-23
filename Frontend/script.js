@@ -1,4 +1,3 @@
-// Material price database (example values - you can update these)
 const materialPrices = {
     'plastic': 30.00,
     'paper': 22.50,
@@ -15,7 +14,6 @@ const materialPrices = {
     'white-glass': 8.00
 };
 
-// Recycling tips database
 const recyclingTips = {
     'plastic': 'Rinse containers before recycling. Remove caps and labels if required.',
     'paper': 'Keep paper dry and clean. Remove any plastic windows from envelopes.',
@@ -32,7 +30,6 @@ const recyclingTips = {
     'white-glass': 'Rinse thoroughly. Clear glass has the highest recycling value.'
 };
 
-// DOM elements
 const fileInput = document.getElementById('file-input');
 const dropArea = document.getElementById('drop-area');
 const scanButton = document.getElementById('scan-button');
@@ -48,18 +45,15 @@ const estimatedValue = document.getElementById('estimated-value');
 const recyclingTip = document.getElementById('recycling-tip');
 const weightInput = document.getElementById('weight');
 
-// Event listeners
 fileInput.addEventListener('change', handleFileSelect);
 dropArea.addEventListener('dragover', handleDragOver);
 dropArea.addEventListener('drop', handleDrop);
 scanButton.addEventListener('click', analyzeImage);
 
-// Enable scan button when file is selected
 fileInput.addEventListener('change', function() {
     scanButton.disabled = !this.files.length;
 });
 
-// Drag and drop handlers
 function handleDragOver(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -85,13 +79,11 @@ function handleFileSelect() {
     if (fileInput.files && fileInput.files[0]) {
     const file = fileInput.files[0];
     
-    // Validate file type
     if (!file.type.match('image.*')) {
         showError('Please select an image file (JPEG, PNG, etc.)');
         return;
     }
     
-    // Preview image
     const reader = new FileReader();
     reader.onload = function(e) {
         imagePreview.src = e.target.result;
@@ -102,7 +94,6 @@ function handleFileSelect() {
     }
 }
 
-// Analyze image with AI
 async function analyzeImage() {
     const API_URL = 'https://ecoscan-backend.onrender.com';
     if (!fileInput.files.length) return;
@@ -111,7 +102,6 @@ async function analyzeImage() {
     const formData = new FormData();
     formData.append('file', file);
     
-    // Show loading state
     loadingElement.classList.remove('hidden');
     scanButton.disabled = true;
     errorElement.classList.add('hidden');
@@ -137,47 +127,37 @@ async function analyzeImage() {
     }
 }
 
-// Display results
 function displayResults(result) {
     if (result.status !== 'success') {
     showError(result.message || 'Analysis failed');
     return;
     }
     
-    // Update prediction
     predictedMaterial.textContent = result.prediction;
     
-    // Update confidence
     const confidencePercent = Math.round(result.confidence * 100);
     confidenceValue.textContent = `${confidencePercent}%`;
     confidenceBar.style.width = `${confidencePercent}%`;
     
-    // Update estimated value
     const weight = parseFloat(weightInput.value) || 1;
     const pricePerKg = materialPrices[result.prediction.toLowerCase()] || 0;
     const value = (weight * pricePerKg).toFixed(2);
     estimatedValue.textContent = `${value} Birr`;
     
-    // Update recycling tip
     recyclingTip.textContent = recyclingTips[result.prediction.toLowerCase()] || 
                             'Ensure the material is clean and free of contaminants for recycling.';
 }
 
-// Error handling
 function showError(message) {
     errorElement.textContent = message;
     errorElement.classList.remove('hidden');
 }
 
-// Mobile menu toggle (if needed)
 document.getElementById('mobile-menu-button').addEventListener('click', function() {
-    // Add mobile menu functionality here if needed
     alert('Mobile menu would open here');
 });
 
-// Update value when weight changes
 weightInput.addEventListener('input', function() {
-    // If we already have a prediction, update the value
     if (predictedMaterial.textContent !== 'Select an image') {
     const weight = parseFloat(this.value) || 1;
     const material = predictedMaterial.textContent.toLowerCase();
