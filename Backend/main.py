@@ -12,7 +12,7 @@ from model.model_loader import ecoscan_model
 app = FastAPI(title="EcoScan API", description="API for waste material classification")
 
 origins = [
-    "https://ecoscan-backend.onrender.com"
+    "https://eco-scan-seven.vercel.app"
     ]
 
 app.add_middleware(
